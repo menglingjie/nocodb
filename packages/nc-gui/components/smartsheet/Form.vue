@@ -650,8 +650,7 @@ const formElementValidationRules = (element) => {
         case StringValidationType.MaxLength: {
           rules.push({
             validator: async (_rule, value) => {
-              console.log('value', value, _rule)
-              if (value) {
+              if (value && val.value !== null) {
                 if (value.length > val.value) {
                   return Promise.reject(val.message || `The input must not exceed ${val.value} characters.`)
                 } else {
@@ -666,7 +665,7 @@ const formElementValidationRules = (element) => {
         case StringValidationType.MinLength: {
           rules.push({
             validator: async (_rule, value) => {
-              if (value) {
+              if (value && val.value !== null) {
                 if (value.length < val.value) {
                   return Promise.reject(val.message || `The input must be at least ${val.value} characters long.`)
                 } else {
@@ -681,7 +680,7 @@ const formElementValidationRules = (element) => {
         case StringValidationType.StartsWith: {
           rules.push({
             validator: async (_rule, value) => {
-              if (value) {
+              if (value && val.value !== null) {
                 if (!value.startsWith(val.value)) {
                   return Promise.reject(val.message || `The input must start with '${val.value}'.`)
                 } else {
@@ -696,7 +695,7 @@ const formElementValidationRules = (element) => {
         case StringValidationType.EndsWith: {
           rules.push({
             validator: async (_rule, value) => {
-              if (value) {
+              if (value && val.value !== null) {
                 if (!value.endsWith(val.value)) {
                   return Promise.reject(val.message || `The input must end with '${val.value}'.`)
                 } else {
@@ -711,7 +710,7 @@ const formElementValidationRules = (element) => {
         case StringValidationType.Includes: {
           rules.push({
             validator: async (_rule, value) => {
-              if (value) {
+              if (value && val.value !== null) {
                 if (!value.includes(val.value)) {
                   return Promise.reject(val.message || `The input must contain the string '${val.value}'.`)
                 } else {
@@ -726,7 +725,7 @@ const formElementValidationRules = (element) => {
         case StringValidationType.NotIncludes: {
           rules.push({
             validator: async (_rule, value) => {
-              if (value) {
+              if (value && val.value !== null) {
                 if (value.includes(val.value)) {
                   return Promise.reject(val.message || `The input must not contain the string '${val.value}'.`)
                 } else {
@@ -741,7 +740,7 @@ const formElementValidationRules = (element) => {
         case StringValidationType.Regex: {
           rules.push({
             validator: async (_rule, value) => {
-              if (value) {
+              if (value && val.value !== null) {
                 const regex = new RegExp(val.regex) // Create a regular expression object
                 console.log('inside regex', val.regex, regex)
                 if (!regex.test(value)) {
@@ -2070,7 +2069,16 @@ useEventListener(
   max-width: 100%;
   white-space: pre-line;
   :deep(.ant-form-item-explain-error) {
-    @apply mt-2;
+    &:first-child {
+      @apply mt-2;
+    }
+  }
+}
+.nc-input-required-error {
+  &:focus-within {
+    :deep(.ant-form-item-explain-error) {
+      @apply text-gray-400;
+    }
   }
 }
 :deep(.ant-form-item-has-error .ant-select:not(.ant-select-disabled) .ant-select-selector) {
