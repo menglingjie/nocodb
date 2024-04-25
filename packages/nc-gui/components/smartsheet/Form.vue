@@ -653,7 +653,7 @@ const formElementValidationRules = (element) => {
               console.log('value', value, _rule)
               if (value) {
                 if (value.length > val.value) {
-                  return Promise.reject(val.message || `Max length should be ${val.value}`)
+                  return Promise.reject(val.message || `The input must not exceed ${val.value} characters.`)
                 } else {
                   return Promise.resolve()
                 }
@@ -668,7 +668,7 @@ const formElementValidationRules = (element) => {
             validator: async (_rule, value) => {
               if (value) {
                 if (value.length < val.value) {
-                  return Promise.reject(val.message || `Min length should be ${val.value}`)
+                  return Promise.reject(val.message || `The input must be at least ${val.value} characters long.`)
                 } else {
                   return Promise.resolve()
                 }
@@ -683,7 +683,7 @@ const formElementValidationRules = (element) => {
             validator: async (_rule, value) => {
               if (value) {
                 if (!value.startsWith(val.value)) {
-                  return Promise.reject(val.message || `Value should starts with ${val.value}`)
+                  return Promise.reject(val.message || `The input must start with '${val.value}'.`)
                 } else {
                   return Promise.resolve()
                 }
@@ -698,7 +698,7 @@ const formElementValidationRules = (element) => {
             validator: async (_rule, value) => {
               if (value) {
                 if (!value.endsWith(val.value)) {
-                  return Promise.reject(val.message || `Value should ends with ${val.value}`)
+                  return Promise.reject(val.message || `The input must end with '${val.value}'.`)
                 } else {
                   return Promise.resolve()
                 }
@@ -713,7 +713,7 @@ const formElementValidationRules = (element) => {
             validator: async (_rule, value) => {
               if (value) {
                 if (!value.includes(val.value)) {
-                  return Promise.reject(val.message || `Value should include ${val.value}`)
+                  return Promise.reject(val.message || `The input must contain the string '${val.value}'.`)
                 } else {
                   return Promise.resolve()
                 }
@@ -728,7 +728,7 @@ const formElementValidationRules = (element) => {
             validator: async (_rule, value) => {
               if (value) {
                 if (value.includes(val.value)) {
-                  return Promise.reject(val.message || `Value should not include ${val.value}`)
+                  return Promise.reject(val.message || `The input must not contain the string '${val.value}'.`)
                 } else {
                   return Promise.resolve()
                 }
@@ -745,7 +745,7 @@ const formElementValidationRules = (element) => {
                 const regex = new RegExp(val.regex) // Create a regular expression object
                 console.log('inside regex', val.regex, regex)
                 if (!regex.test(value)) {
-                  return Promise.reject(val.message || `Value does not match the required pattern: ${val.regex}`)
+                  return Promise.reject(val.message || `The input does not match the required format.`)
                 } else {
                   return Promise.resolve()
                 }
