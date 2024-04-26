@@ -2,6 +2,9 @@
   "name": "nocodb-root",
   "description": "NocoDB Root",
   "private": true,
+  "engines": {
+    "node": ">=18.20.2"
+  },
   "author": {
     "name": "NocoDB Inc",
     "url": "https://nocodb.com/"
